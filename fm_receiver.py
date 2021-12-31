@@ -94,9 +94,9 @@ class fm_receiver(gr.top_block, Qt.QWidget):
         for c in range(1, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
         # Create the options list
-        self._tuner_options = (103300000, 106600000, 103000000, )
+        self._tuner_options = (103300000, 104000000, 94900000, )
         # Create the labels list
-        self._tuner_labels = ('103.3', '106.6', '103.0', )
+        self._tuner_labels = ('Gold Radio Branicevo', 'Radio Beograd 202', 'Radio S', )
         # Create the combo box
         # Create the radio buttons
         self._tuner_group_box = Qt.QGroupBox('Station Select' + ": ")
