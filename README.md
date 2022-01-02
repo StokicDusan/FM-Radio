@@ -9,6 +9,10 @@
 # FM_Rx
 RTL-SDR FM receiver with GNU Radio Companion
 
+
+<img src="block-scheme.png" alt="scheme" width="auto" height="auto" />
+
+
 [release-url]: https://github.com/StokicDusan/FM_Rx/releases
 [downloads-shield]: https://img.shields.io/github/downloads/StokicDusan/FM_Rx/total 
 [downloads-url]: https://github.com/StokicDusan/FM_Rx/releases
