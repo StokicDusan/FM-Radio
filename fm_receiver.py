@@ -22,7 +22,6 @@ if __name__ == '__main__':
             print("Warning: failed to XInitThreads()")
 
 from PyQt5 import Qt
-from PyQt5.QtCore import QObject, pyqtSlot
 from gnuradio import qtgui
 from gnuradio.filter import firdes
 import sip
@@ -78,7 +77,7 @@ class fm_receiver(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.volume = volume = 0
-        self.tuner = tuner = 103300000
+        self.tuner = tuner = 87000000
         self.samp_rate = samp_rate = 2000000
         self.rfgain = rfgain = 15
         self.down_rate = down_rate = 250000
@@ -93,31 +92,9 @@ class fm_receiver(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(1, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
-        # Create the options list
-        self._tuner_options = (103300000, 104000000, 94900000, )
-        # Create the labels list
-        self._tuner_labels = ('Gold Radio Branicevo', 'Radio Beograd 202', 'Radio S', )
-        # Create the combo box
-        # Create the radio buttons
-        self._tuner_group_box = Qt.QGroupBox('Station Select' + ": ")
-        self._tuner_box = Qt.QHBoxLayout()
-        class variable_chooser_button_group(Qt.QButtonGroup):
-            def __init__(self, parent=None):
-                Qt.QButtonGroup.__init__(self, parent)
-            @pyqtSlot(int)
-            def updateButtonChecked(self, button_id):
-                self.button(button_id).setChecked(True)
-        self._tuner_button_group = variable_chooser_button_group()
-        self._tuner_group_box.setLayout(self._tuner_box)
-        for i, _label in enumerate(self._tuner_labels):
-            radio_button = Qt.QRadioButton(_label)
-            self._tuner_box.addWidget(radio_button)
-            self._tuner_button_group.addButton(radio_button, i)
-        self._tuner_callback = lambda i: Qt.QMetaObject.invokeMethod(self._tuner_button_group, "updateButtonChecked", Qt.Q_ARG("int", self._tuner_options.index(i)))
-        self._tuner_callback(self.tuner)
-        self._tuner_button_group.buttonClicked[int].connect(
-            lambda i: self.set_tuner(self._tuner_options[i]))
-        self.top_grid_layout.addWidget(self._tuner_group_box, 1, 0, 1, 2)
+        self._tuner_range = Range(87000000, 108000000, 100000, 87000000, 200)
+        self._tuner_win = RangeWidget(self._tuner_range, self.set_tuner, 'Station Select', "counter_slider", int)
+        self.top_grid_layout.addWidget(self._tuner_win, 1, 0, 1, 2)
         for r in range(1, 2):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 2):
@@ -153,7 +130,7 @@ class fm_receiver(gr.top_block, Qt.QWidget):
             'Demod Out', #name
             1
         )
-        self.qtgui_freq_sink_x_0_0.set_update_time(0.15)
+        self.qtgui_freq_sink_x_0_0.set_update_time(0.1)
         self.qtgui_freq_sink_x_0_0.set_y_axis(-140, 10)
         self.qtgui_freq_sink_x_0_0.set_y_label('Relative Gain', 'dB')
         self.qtgui_freq_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
@@ -198,7 +175,7 @@ class fm_receiver(gr.top_block, Qt.QWidget):
             'Sampling Bandpass', #name
             1
         )
-        self.qtgui_freq_sink_x_0.set_update_time(0.15)
+        self.qtgui_freq_sink_x_0.set_update_time(0.1)
         self.qtgui_freq_sink_x_0.set_y_axis(-140, 10)
         self.qtgui_freq_sink_x_0.set_y_label('Relative Gain', 'dB')
         self.qtgui_freq_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
@@ -280,7 +257,6 @@ class fm_receiver(gr.top_block, Qt.QWidget):
 
     def set_tuner(self, tuner):
         self.tuner = tuner
-        self._tuner_callback(self.tuner)
         self.qtgui_freq_sink_x_0.set_frequency_range(self.tuner, self.samp_rate)
         self.qtgui_freq_sink_x_0_0.set_frequency_range(self.tuner, self.down_rate)
         self.rtlsdr_source_0.set_center_freq(self.tuner, 0)
