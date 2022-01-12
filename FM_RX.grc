@@ -78,32 +78,24 @@ blocks:
     rotation: 0
     state: enabled
 - name: tuner
-  id: variable_qtgui_chooser
+  id: variable_qtgui_range
   parameters:
     comment: ''
     gui_hint: 1,0,1,2
     label: Station Select
-    label0: Gold Radio Branicevo
-    label1: Radio Beograd 202
-    label2: Radio S
-    label3: ''
-    label4: ''
-    labels: '[]'
-    num_opts: '3'
-    option1: '104000000'
-    option2: '94900000'
-    option3: '3'
-    option4: '4'
-    options: '[0, 1, 2]'
-    orient: Qt.QHBoxLayout
-    type: int
-    value: '103300000'
-    widget: radio_buttons
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: int
+    start: '87000000'
+    step: '100000'
+    stop: '108000000'
+    value: '87000000'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [128, 228.0]
+    coordinate: [240, 228.0]
     rotation: 0
     state: true
 - name: volume
@@ -124,7 +116,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 356.0]
+    coordinate: [128, 228.0]
     rotation: 0
     state: true
 - name: analog_wfm_rcv_0
@@ -141,7 +133,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 148.0]
+    coordinate: [744, 68.0]
     rotation: 0
     state: true
 - name: audio_sink_0
@@ -158,8 +150,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [344, 348.0]
-    rotation: 180
+    coordinate: [1040, 260.0]
+    rotation: 0
     state: true
 - name: blocks_multiply_const_vxx_0
   id: blocks_multiply_const_vxx
@@ -176,8 +168,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [560, 348.0]
-    rotation: 180
+    coordinate: [784, 260.0]
+    rotation: 0
     state: enabled
 - name: low_pass_filter_0
   id: low_pass_filter
@@ -200,7 +192,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 44.0]
+    coordinate: [488, 28.0]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -262,7 +254,7 @@ blocks:
     tr_tag: '""'
     type: complex
     units: dB
-    update_time: '0.15'
+    update_time: '0.1'
     width1: '1'
     width10: '1'
     width2: '1'
@@ -280,7 +272,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 192.0]
+    coordinate: [488, 176.0]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0_0
@@ -342,7 +334,7 @@ blocks:
     tr_tag: '""'
     type: float
     units: dB
-    update_time: '0.15'
+    update_time: '0.1'
     width1: '1'
     width10: '1'
     width2: '1'
@@ -360,8 +352,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 24.0]
-    rotation: 180
+    coordinate: [1032, 64.0]
+    rotation: 0
     state: true
 - name: rational_resampler_xxx_0
   id: rational_resampler_xxx
@@ -380,7 +372,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 244.0]
+    coordinate: [760, 156.0]
     rotation: 180
     state: true
 - name: rtlsdr_source_0
