@@ -7,7 +7,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 # FM_Rx
-RTL-SDR FM receiver with GNU Radio Companion.  
+RTL-SDR FM radio receiver with GNU Radio Companion.  
 block scheme is shown below:
 
 
